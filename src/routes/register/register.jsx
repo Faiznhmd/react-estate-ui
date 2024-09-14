@@ -2,6 +2,7 @@ import axios from 'axios';
 import './register.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import apiRequest from '../../lib/apiRequest.js';
 
 function Register() {
   const [error, setError] = useState('');
@@ -19,11 +20,12 @@ function Register() {
     const password = formData.get('password');
 
     try {
-      const res = await axios.post('http://localhost:8000/api/auth/register', {
+      const res = await apiRequest.post('/auth/register', {
         username,
         email,
         password,
       });
+      console.log(res.data);
       navigate('/login');
     } catch (err) {
       setError(err.response.data.message);

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import './login.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import apiRequest from '../../lib/apiRequest.js';
 import { useState } from 'react';
 
 function Login() {
@@ -19,7 +20,7 @@ function Login() {
     const password = formData.get('password');
 
     try {
-      const res = await axios.post('http://localhost:8000/api/auth/login', {
+      const res = await apiRequest.post('/auth/login', {
         username,
         password,
       });
