@@ -1,13 +1,13 @@
 import axios from 'axios';
 import './login.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +23,12 @@ function Login() {
         username,
         password,
       });
-      console.log(res.data);
-      // navigate('/login');
+
+      //data stored in localstorage
+      localStorage.setItem('user', JSON.stringify(res.data));
+
+      navigate('/');
+      // console.log(res.data);
     } catch (err) {
       setError(err.response.data.message);
     } finally {
