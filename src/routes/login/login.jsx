@@ -1,15 +1,18 @@
-import axios from 'axios';
 import './login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import apiRequest from '../../lib/apiRequest.js';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext.jsx';
 
 function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { updateUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
+  //handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -25,8 +28,8 @@ function Login() {
         password,
       });
 
-      //data stored in localstorage
-      localStorage.setItem('user', JSON.stringify(res.data));
+      //this will update the  name when the user is login by name
+      updateUser(res.data);
 
       navigate('/');
       // console.log(res.data);
