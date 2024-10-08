@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import Pin from '../pin/Pin';
 
 function Map({ items }) {
+  // console.log(items);
+
   return (
     <MapContainer
       center={
